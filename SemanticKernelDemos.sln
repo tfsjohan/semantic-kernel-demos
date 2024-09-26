@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticKernelDemos.BasicChat", "SemanticKernelDemos.BasicChat\SemanticKernelDemos.BasicChat.csproj", "{3713BBD5-2258-4FCA-9CAD-69EDB1702C95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{F2837F06-61E2-4F12-8641-8B574801FFE8}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3713BBD5-2258-4FCA-9CAD-69EDB1702C95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3713BBD5-2258-4FCA-9CAD-69EDB1702C95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3713BBD5-2258-4FCA-9CAD-69EDB1702C95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3713BBD5-2258-4FCA-9CAD-69EDB1702C95}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
