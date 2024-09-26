@@ -6,3 +6,5 @@ riderModule.iml
 .idea/
 *.suo
 
+appsettings.json
+

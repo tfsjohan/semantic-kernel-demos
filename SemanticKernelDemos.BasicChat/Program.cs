@@ -4,6 +4,7 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 var config = new ConfigurationBuilder()
+    .AddEnvironmentVariables()
     .AddUserSecrets<Program>()
     .Build();
 
@@ -11,9 +12,9 @@ var systemPrompt = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Prom
 
 var builder = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(
-        "gpt-4o-mini",
-        config["AOAI:Endpoint"]!,
-        config["AOAI:ApiKey"]!);
+        config["deployment"]!,
+        config["endpoint"]!,
+        config["apikey"]!);
 
 var kernel = builder.Build();
 var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
