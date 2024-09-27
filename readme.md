@@ -31,12 +31,17 @@ Demos of using plugins and function calling. Includes built-in functions and cus
 To use the Weather plugin, you need to provide an API key for OpenWeatherMap. Set this as a user secret.
 
 ```bash
-dotnet user-secret set "OpenCage:ApiKey" "your-apikey"
+dotnet user-secret set "OpenWeather:ApiKey" "your-apikey"
 ```
 
 ## WebChat
 
 An example of a chatbot that can be embedded in a web page.
+
+## Extract details from image
+
+An example of using a vision model to extract details from an image. In this particular case it extracts company
+details from a PUB agreement. 
 
 
 

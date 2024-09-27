@@ -1,0 +1,13 @@
+@host = https://localhost:7246
+
+POST {{host}}/
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="file.jpg"
+Content-Type: image/jpeg
+
+< ./PUB-agreement.jpg
+--WebAppBoundary--
+
+###
