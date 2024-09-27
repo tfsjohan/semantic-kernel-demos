@@ -24,3 +24,15 @@ dotnet user-secrets set "apikey" "your-apikey"
 
 An example of a basic chatbot with a system prompt that set the tone of the conversation.
 
+## FunctionCalling
+
+Demos of using plugins and function calling. Includes built-in functions and custom functions.
+
+To use the Weather plugin, you need to provide an API key for OpenWeatherMap. Set this as a user secret.
+
+```bash
+dotnet user-secret set "OpenCage:ApiKey" "your-apikey"
+```
+
+
+

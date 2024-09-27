@@ -30,7 +30,7 @@ while (true)
 
     OpenAIPromptExecutionSettings openAiPromptExecutionSettings = new()
     {
-        MaxTokens = 200,
+        MaxTokens = 1000,
         Temperature = 0.9,
     };
 
