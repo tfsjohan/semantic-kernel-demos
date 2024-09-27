@@ -1,0 +1,88 @@
+﻿@rendermode InteractiveServer
+@page "/"
+@using Markdig
+@using SemanticKernelDemos.WebChat.Models
+@inject ChatbotService ChatbotService
+
+<PageTitle>Chatbot</PageTitle>
+
+<div class="container">
+    <div class="messages">
+        @foreach (var message in messages)
+        {
+            <div class="message @(message.Role == ChatMessage.ParticipantRole.Assistant ? "assistant" : "user")">
+                <div class="message-content">
+                    @((MarkupString)message.Text)
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="write">
+        <textarea @bind="prompt" @bind:event="oninput"></textarea>
+        <button class="btn btn-primary" @onclick="SendMessage">Send</button>
+        <button class="btn btn-secondary" @onclick="ClearChat">Clear</button>
+    </div>
+</div>
+
+@* ReSharper disable InconsistentNaming *@
+
+@code {
+
+    private string prompt = "";
+    private string sessionId = Guid.NewGuid().ToString();
+    private readonly List<ChatMessage> messages = new();
+
+    private async Task SendMessage()
+    {
+        try
+        {
+            var request = new ChatRequest
+            {
+                SessionId = sessionId,
+                Prompt = prompt
+            };
+
+            messages.Add(new()
+            {
+                Role = ChatMessage.ParticipantRole.User,
+                Text = prompt
+            });
+
+            prompt = "";
+            StateHasChanged();
+
+            var response = ChatbotService.GenerateResponse(request);
+            var assistantMessage = new ChatMessage
+            {
+                Role = ChatMessage.ParticipantRole.Assistant,
+                Text = ""
+            };
+            messages.Add(assistantMessage);
+
+            var markdown = "";
+            await foreach (var chunk in response)
+            {
+                markdown += chunk;
+                assistantMessage.Text = Markdown.ToHtml(markdown);
+                StateHasChanged();
+            }
+        }
+        catch (Exception e)
+        {
+            messages.Add(new()
+            {
+                Role = ChatMessage.ParticipantRole.Assistant,
+                Text = $"An error occurred: {e.Message}"
+            });
+        }
+    }
+
+    private void ClearChat()
+    {
+        messages.Clear();
+        prompt = "";
+        sessionId = Guid.NewGuid().ToString();
+    }
+
+}

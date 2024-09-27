@@ -34,5 +34,9 @@ To use the Weather plugin, you need to provide an API key for OpenWeatherMap. Se
 dotnet user-secret set "OpenCage:ApiKey" "your-apikey"
 ```
 
+## WebChat
+
+An example of a chatbot that can be embedded in a web page.
+
 
 
