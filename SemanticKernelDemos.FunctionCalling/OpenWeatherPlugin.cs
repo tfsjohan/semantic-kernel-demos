@@ -14,7 +14,7 @@ public class OpenWeatherPlugin(HttpClient httpClient, IConfiguration config)
     [Description("Get the latitude and longitude of a location, like a city.")]
     public async Task<LocationData[]> GetLatitudeAndLongitude([Description("The name of the location")] string location)
     {
-        var apiKey = config["OpenCage:ApiKey"];
+        var apiKey = config["OpenWeather:ApiKey"];
         var url = $"https://api.openweathermap.org/geo/1.0/direct?q={location}&key={apiKey}&limit=1";
         var response = await httpClient.GetFromJsonAsync<LocationData[]>(url);
         if (response is null)
