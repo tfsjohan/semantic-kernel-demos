@@ -28,7 +28,7 @@ public class OpenWeatherPlugin(HttpClient httpClient, IConfiguration config)
     [KernelFunction]
     [Description("Get weather information for a location, like a city or country.")]
     public async Task<string> GetWeather(
-        [Description("The name of the location, city, region. Can include whitespaces, commas and åäö.")]
+        [Description("Friendly name of the location, like a city or country. Ex: Stockholm, Sweden.")]
         string location)
     {
         var apiKey = config["OpenWeather:ApiKey"];
@@ -47,40 +47,54 @@ public class OpenWeatherPlugin(HttpClient httpClient, IConfiguration config)
 
 public class WeatherData
 {
-    [JsonPropertyName("name")] public string? CityName { get; set; }
+    [JsonPropertyName("name")]
+    public string? CityName { get; set; }
 
-    [JsonPropertyName("main")] public MainData? Main { get; set; }
+    [JsonPropertyName("main")]
+    public MainData? Main { get; set; }
 
-    [JsonPropertyName("weather")] public WeatherInfo[]? Weather { get; set; }
+    [JsonPropertyName("weather")]
+    public WeatherInfo[]? Weather { get; set; }
 
     public class MainData
     {
-        [JsonPropertyName("temp")] public double Temperature { get; set; }
+        [JsonPropertyName("temp")]
+        public double Temperature { get; set; }
 
-        [JsonPropertyName("feels_like")] public double FeelsLikeTemperature { get; set; }
+        [JsonPropertyName("feels_like")]
+        public double FeelsLikeTemperature { get; set; }
 
-        [JsonPropertyName("temp_min")] public double MinTemperature { get; set; }
+        [JsonPropertyName("temp_min")]
+        public double MinTemperature { get; set; }
 
-        [JsonPropertyName("temp_max")] public double MaxTemperature { get; set; }
+        [JsonPropertyName("temp_max")]
+        public double MaxTemperature { get; set; }
 
-        [JsonPropertyName("humidity")] public double Humidity { get; set; }
+        [JsonPropertyName("humidity")]
+        public double Humidity { get; set; }
     }
 
     public class WeatherInfo
     {
-        [JsonPropertyName("main")] public string? Main { get; set; }
+        [JsonPropertyName("main")]
+        public string? Main { get; set; }
 
-        [JsonPropertyName("description")] public string? Description { get; set; }
+        [JsonPropertyName("description")]
+        public string? Description { get; set; }
     }
 }
 
 public class LocationData
 {
-    [JsonPropertyName("name")] public string? Name { get; set; }
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
 
-    [JsonPropertyName("country")] public string? Country { get; set; }
+    [JsonPropertyName("country")]
+    public string? Country { get; set; }
 
-    [JsonPropertyName("lat")] public double Latitude { get; set; }
+    [JsonPropertyName("lat")]
+    public double Latitude { get; set; }
 
-    [JsonPropertyName("lon")] public double Longitude { get; set; }
+    [JsonPropertyName("lon")]
+    public double Longitude { get; set; }
 }
