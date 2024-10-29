@@ -54,18 +54,16 @@ OpenAIPromptExecutionSettings openAiPromptExecutionSettings = new()
 {
     MaxTokens = 2000,
     Temperature = 0.7,
-    FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
+    FunctionChoiceBehavior = FunctionChoiceBehavior.Auto() // This is the magic!
 };
 
-#region Chat loop
+Console.Clear();
 
 while (true)
 {
     // Get user input
-    Console.ForegroundColor = ConsoleColor.DarkBlue;
-    Console.Write("\nUser > ");
-    Console.ForegroundColor = ConsoleColor.Blue;
-    history.AddUserMessage(Console.ReadLine()!);
+    var userInput = AskUserForInput();
+    history.AddUserMessage(userInput);
 
     // Get the response from the AI
     var response = chatCompletionService.GetStreamingChatMessageContentsAsync(
@@ -74,22 +72,36 @@ while (true)
         kernel: kernel);
 
 
-    Console.ForegroundColor = ConsoleColor.DarkGreen;
-    Console.Write("\nAssistant > ");
-    Console.ForegroundColor = ConsoleColor.Green;
+    OutputAssistantName();
 
     var combinedResponse = string.Empty;
     await foreach (var message in response)
     {
-        //Write the response to the console
-        Console.Write(message);
+        WriteChunkToConsole(message);
         combinedResponse += message;
     }
-
-    Console.WriteLine();
 
     // Add the message from the agent to the chat history
     history.AddAssistantMessage(combinedResponse);
 }
 
-#endregion
+string AskUserForInput()
+{
+    Console.ForegroundColor = ConsoleColor.DarkBlue;
+    Console.Write("\n\nUser > ");
+    Console.ForegroundColor = ConsoleColor.Blue;
+
+    return Console.ReadLine()!;
+}
+
+void OutputAssistantName()
+{
+    Console.ForegroundColor = ConsoleColor.DarkGreen;
+    Console.Write("\nAssistant > ");
+    Console.ForegroundColor = ConsoleColor.Green;
+}
+
+void WriteChunkToConsole(StreamingChatMessageContent? chunk)
+{
+    Console.Write(chunk);
+}

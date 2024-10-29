@@ -1,4 +1,4 @@
-@host = https://localhost:7246
+@host = http://localhost:5220
 
 POST {{host}}/
 Content-Type: multipart/form-data; boundary=WebAppBoundary
